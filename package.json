@@ -21,8 +21,11 @@
   "homepage": "https://github.com/benthepoet/fp-injector#readme",
   "devDependencies": {
     "assert": "^1.4.1",
+    "coveralls": "^3.0.0",
+    "istanbul": "^0.4.5",
     "lodash": "^4.17.5",
     "mocha": "^5.1.0",
+    "mocha-lcov-reporter": "^1.3.0",
     "ramda": "^0.25.0",
     "underscore": "^1.8.3"
   }
