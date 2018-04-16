@@ -24,7 +24,7 @@ function service(Service, dependencies) {
     let instance;
     
     Object.defineProperty(container, Service.name, {
-      get: () => {
+      get() {
         if (!instance) {
           const resolvedDeps = dependencies.map(dep => resolve(dep, container));
           instance = new (Service.bind.apply(Service, [null].concat(resolvedDeps)));
