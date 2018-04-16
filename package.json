@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/benthepoet/fp-injector#readme",
   "devDependencies": {
+    "assert": "^1.4.1",
     "lodash": "^4.17.5",
+    "mocha": "^5.1.0",
     "ramda": "^0.25.0",
     "underscore": "^1.8.3"
   }
