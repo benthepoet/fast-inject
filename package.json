@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/benthepoet/fp-injector#readme",
   "devDependencies": {
-    "ramda": "^0.25.0"
+    "lodash": "^4.17.5",
+    "ramda": "^0.25.0",
+    "underscore": "^1.8.3"
   }
 }
