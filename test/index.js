@@ -53,6 +53,16 @@ describe('container', () => {
   ];
 
   libraries.forEach(function (library) {
+    it(`${library.name}: should fail to resolve A when dependencies can't be resolved`, function () {
+      const container = library.compose(
+        service(A, [B.name])
+      )({});
+      
+      assert.throws(function () {
+        container.A;
+      }, Error);
+    });
+    
     it(`${library.name}: should resolve A and inject dependencies`, function () {
       const container = library.compose(
         constant('D', D),
