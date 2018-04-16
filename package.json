@@ -1,0 +1,25 @@
+{
+  "name": "fp-injector",
+  "version": "1.0.0",
+  "description": "A dependency injection container built around function composition.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benthepoet/fp-injector.git"
+  },
+  "author": "Ben Hanna <benpaulhanna@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benthepoet/fp-injector/issues"
+  },
+  "homepage": "https://github.com/benthepoet/fp-injector#readme",
+  "devDependencies": {
+    "ramda": "^0.25.0"
+  }
+}

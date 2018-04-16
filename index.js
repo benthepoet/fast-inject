@@ -6,7 +6,7 @@ module.exports = {
 function constant(name, value) {
   return container => {
     const options = { value };
-    Object.defineProperty(this.container, name, options);
+    Object.defineProperty(container, name, options);
     return container;
   };
 }
@@ -26,7 +26,7 @@ function service(Service, dependencies) {
     Object.defineProperty(container, Service.name, {
       get: () => {
         if (!instance) {
-          const resolvedDeps = dependencies.map(dep => resolve(dep));
+          const resolvedDeps = dependencies.map(dep => resolve(dep, container));
           instance = new (Service.bind.apply(Service, [null].concat(resolvedDeps)));
         }
         return instance;
