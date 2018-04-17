@@ -1,33 +1,49 @@
+class Injector {
+  constructor() {
+    this.container = Object.create(null);
+  }
+  
+  constant(name, value) {
+    constant(name, value)(this.container);
+    return this;
+  }
+  
+  service(Service, dependencies) {
+    service(Service, dependencies)(this.container);
+    return this;
+  }
+}
+
 module.exports = {
+  Injector,
   constant,
   service
 };
 
 function constant(name, value) {
   return container => {
-    const options = { value };
-    Object.defineProperty(container, name, options);
+    Object.defineProperty(container, name, { value });
     return container;
   };
 }
 
 function resolve(name, container) {
   const instance = container[name];
-  if (!instance) {
+  if (instance === undefined) {
     throw new Error(`Could not resolve '${name}'.`);
   }
   return instance;
 }
 
-function service(Service, dependencies) {
+function service(Class, dependencies) {
   return container => {
     let instance;
     
-    Object.defineProperty(container, Service.name, {
+    Object.defineProperty(container, Class.name, {
       get() {
         if (!instance) {
           const resolvedDeps = dependencies.map(dep => resolve(dep, container));
-          instance = new (Service.bind.apply(Service, [null].concat(resolvedDeps)));
+          instance = new (Class.bind.apply(Class, [null].concat(resolvedDeps)));
         }
         return instance;
       }
