@@ -5,7 +5,7 @@ const R = require('ramda');
 
 const { Injector, constant, service } = require('../');
 
-describe('Container', () => {
+describe('Container Composition', () => {
   const A = 'A';
   
   class B {
