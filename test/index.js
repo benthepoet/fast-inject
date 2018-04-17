@@ -40,6 +40,14 @@ describe('Container', () => {
   describe('Functional', function () {
     const libraries = [
       {
+        name: 'reduce',
+        compose(...pipes) {
+          return container => {
+            return pipes.reduce((obj, pipe) => pipe(obj), container);
+          };
+        }
+      },
+      {
         name: 'ramda', 
         compose: R.pipe
       },
