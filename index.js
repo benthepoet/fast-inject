@@ -43,7 +43,7 @@ function service(Class, dependencies) {
       get() {
         if (!instance) {
           const resolvedDeps = dependencies.map(dep => resolve(dep, container));
-          instance = new (Class.bind.apply(Class, [null].concat(resolvedDeps)));
+          instance = new (Class.bind(Class, ...resolvedDeps));
         }
         return instance;
       }
