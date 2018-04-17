@@ -3,13 +3,25 @@ class Injector {
     this.container = Object.create(null);
   }
   
+  /**
+   * Define a constant on the injector's container.
+   * @param {string} name
+   * @param {*} value
+   * @returns {Injector} The Injector instance.
+   */
   constant(name, value) {
     constant(name, value)(this.container);
     return this;
   }
   
-  service(Service, dependencies) {
-    service(Service, dependencies)(this.container);
+  /**
+   * Define a service on the injector's container.
+   * @param {Function} Class
+   * @param {string[]} dependencies
+   * @returns {Injector} The Injector instance.
+   */
+  service(Class, dependencies) {
+    service(Class, dependencies)(this.container);
     return this;
   }
 }
@@ -20,6 +32,11 @@ module.exports = {
   service
 };
 
+/**
+ * Define a constant on a container.
+ * @param {string} name
+ * @param {*} value
+ */
 function constant(name, value) {
   return container => {
     Object.defineProperty(container, name, { value });
@@ -27,6 +44,11 @@ function constant(name, value) {
   };
 }
 
+/**
+ * Resolve an instance on a container.
+ * @param {string} name
+ * @param {Object} container
+ */
 function resolve(name, container) {
   const instance = container[name];
   if (instance === undefined) {
@@ -35,6 +57,11 @@ function resolve(name, container) {
   return instance;
 }
 
+/**
+ * Define a service on a container.
+ * @param {Function} Class
+ * @param {string[]} dependencies
+ */
 function service(Class, dependencies) {
   return container => {
     let instance;
