@@ -10,7 +10,7 @@ class Injector {
    * @returns {Injector} The Injector instance.
    */
   constant(name, value) {
-    constant(name, value)(this.container);
+    constant(name, value, this.container);
     return this;
   }
   
@@ -21,7 +21,7 @@ class Injector {
    * @returns {Injector} The Injector instance.
    */
   service(Class, dependencies) {
-    service(Class, dependencies)(this.container);
+    service(Class, dependencies, this.container);
     return this;
   }
 }
@@ -37,11 +37,13 @@ module.exports = {
  * @param {string} name
  * @param {*} value
  */
-function constant(name, value) {
-  return container => {
-    Object.defineProperty(container, name, { value });
-    return container;
-  };
+function constant(name, value, container) {
+  if (arguments.length === 2) {
+    return constant.bind(null, name, value);
+  }
+  
+  Object.defineProperty(container, name, { value });
+  return container;
 }
 
 /**
@@ -62,20 +64,22 @@ function resolve(name, container) {
  * @param {Function} Class
  * @param {string[]} dependencies
  */
-function service(Class, dependencies) {
-  return container => {
-    let instance;
+function service(Class, dependencies, container) {
+  if (arguments.length === 2) {
+    return service.bind(null, Class, dependencies);
+  }
+  
+  let instance;
     
-    Object.defineProperty(container, Class.name, {
-      get() {
-        if (instance === undefined) {
-          const resolvedDeps = dependencies.map(dep => resolve(dep, container));
-          instance = new Class(...resolvedDeps);
-        }
-        return instance;
+  Object.defineProperty(container, Class.name, {
+    get() {
+      if (instance === undefined) {
+        const resolvedDeps = dependencies.map(dep => resolve(dep, container));
+        instance = new Class(...resolvedDeps);
       }
-    });
-    
-    return container;
-  };
+      return instance;
+    }
+  });
+  
+  return container;
 }
