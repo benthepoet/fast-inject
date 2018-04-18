@@ -68,9 +68,9 @@ function service(Class, dependencies) {
     
     Object.defineProperty(container, Class.name, {
       get() {
-        if (!instance) {
+        if (instance === undefined) {
           const resolvedDeps = dependencies.map(dep => resolve(dep, container));
-          instance = new (Class.bind(Class, ...resolvedDeps));
+          instance = new Class(...resolvedDeps);
         }
         return instance;
       }
