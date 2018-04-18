@@ -1,5 +1,5 @@
 {
-  "name": "fp-injector",
+  "name": "fast-inject",
   "version": "1.0.0",
   "description": "A dependency injection container built around function composition.",
   "main": "index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/benthepoet/fp-injector.git"
+    "url": "git+https://github.com/benthepoet/fast-inject.git"
   },
   "author": "Ben Hanna <benpaulhanna@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/benthepoet/fp-injector/issues"
+    "url": "https://github.com/benthepoet/fast-inject/issues"
   },
-  "homepage": "https://github.com/benthepoet/fp-injector#readme",
+  "homepage": "https://github.com/benthepoet/fast-inject#readme",
   "devDependencies": {
     "assert": "^1.4.1",
     "benchmark": "^2.1.4",
