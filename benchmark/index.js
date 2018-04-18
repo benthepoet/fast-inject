@@ -1,5 +1,5 @@
 const Benchmark = require('benchmark');
-const { Injector, service } = require('./');
+const { Injector, service } = require('../');
 
 const suite = new Benchmark.Suite();
 
