@@ -1,4 +1,8 @@
 const Benchmark = require('benchmark');
+const R = require('ramda');
+const fp = require('lodash/fp');
+const _ = require('underscore');
+const Bottle = require('bottlejs');
 const { Injector, service } = require('../');
 
 const suite = new Benchmark.Suite();
@@ -30,6 +34,41 @@ suite
     )(Object.create(null));
       
     container.A;
+  })
+  .add('ramda', function () {
+    const container = R.pipe(
+      service(A, [B.name]),
+      service(B, [C.name]),
+      service(C, [])
+    )(Object.create(null));
+
+    container.A;
+  })
+  .add('lodash', function () {
+    const container = fp.flow(
+      service(A, [B.name]),
+      service(B, [C.name]),
+      service(C, [])
+    )(Object.create(null));
+
+    container.A;
+  })
+  .add('underscore', function () {
+    const container = _.compose(
+      service(A, [B.name]),
+      service(B, [C.name]),
+      service(C, [])
+    )(Object.create(null));
+
+    container.A;
+  })
+  .add('Bottle', function () {
+    const bottle = new Bottle();
+    bottle.service('A', A, B.name);
+    bottle.service('B', B, C.name);
+    bottle.service('C', C);
+
+    bottle.container.A;
   })
   .add('Injector', function () {
     const { container } = new Injector()

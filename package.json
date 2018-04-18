@@ -22,6 +22,7 @@
   "devDependencies": {
     "assert": "^1.4.1",
     "benchmark": "^2.1.4",
+    "bottlejs": "^1.7.0",
     "coveralls": "^3.0.0",
     "istanbul": "^0.4.5",
     "lodash": "^4.17.5",
