@@ -74,7 +74,11 @@ function service(Class, dependencies, container) {
   Object.defineProperty(container, Class.name, {
     get() {
       if (instance === undefined) {
-        const resolvedDeps = dependencies.map(dep => resolve(dep, container));
+        let resolving = dependencies.length;
+        const resolvedDeps = new Array(resolving);
+        while (resolving--) {
+          resolvedDeps[resolving] = resolve(dependencies[resolving], container);
+        }
         instance = new Class(...resolvedDeps);
       }
       return instance;
