@@ -21,19 +21,13 @@ class B {
 
 class C {}
 
-function reducer(...pipes) {
-  let p = pipes.length;
-  return function (container) {
-    while (p--) {
-      pipes[p](container);
-    }
-    return container;
-  }
-}
+const compose = (...pipes) => {
+  return container => pipes.reduce((obj, pipe) => pipe(obj), container);
+};
 
 suite
-  .add('reducer', function () {
-    const container = reducer(
+  .add('reduce', function () {
+    const container = compose(
       service(A, [B.name]),
       service(B, [C.name]),
       service(C, [])

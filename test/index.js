@@ -20,15 +20,9 @@ describe('Container Composition', () => {
   describe('Functional', function () {
     const composers = [
       {
-        name: 'reducer',
-        compose: function (...pipes) {
-          let p = pipes.length;
-          return function (container) {
-            while (p--) {
-              pipes[p](container);
-            }
-            return container;
-          }
+        name: 'reduce',
+        compose: (...pipes) => {
+          return container => pipes.reduce((obj, pipe) => pipe(obj), container);
         }
       },
       {
