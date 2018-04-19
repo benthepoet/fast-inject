@@ -21,12 +21,18 @@ class B {
 
 class C {}
 
-const reducer = (...pipes) => {
-  return container => pipes.reduce((obj, pipe) => pipe(obj), container);
-};
+function reducer(...pipes) {
+  let p = pipes.length;
+  return function (container) {
+    while (p--) {
+      pipes[p](container);
+    }
+    return container;
+  }
+}
 
 suite
-  .add('reduce', function () {
+  .add('reducer', function () {
     const container = reducer(
       service(A, [B.name]),
       service(B, [C.name]),
@@ -61,14 +67,6 @@ suite
     )(Object.create(null));
 
     container.A;
-  })
-  .add('Bottle', function () {
-    const bottle = new Bottle();
-    bottle.service('A', A, B.name);
-    bottle.service('B', B, C.name);
-    bottle.service('C', C);
-
-    bottle.container.A;
   })
   .add('Injector', function () {
     const { container } = new Injector()
