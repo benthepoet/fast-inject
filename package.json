@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/benthepoet/fast-inject#readme",
   "devDependencies": {
-    "assert": "^1.4.1",
     "benchmark": "^2.1.4",
     "bottlejs": "^1.7.0",
     "coveralls": "^3.0.0",
