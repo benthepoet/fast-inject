@@ -1,6 +1,6 @@
 {
   "name": "fast-inject",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A lightweight dependency injection container for Node.js.",
   "main": "index.js",
   "keywords": [
