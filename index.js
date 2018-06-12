@@ -1,3 +1,8 @@
+/**
+ * The class for constructing a dependency container.
+ * @class Injector
+ * @property {Object} container - The container instance.
+ */
 class Injector {
   constructor() {
     this.container = Object.create(null);
@@ -36,6 +41,8 @@ module.exports = {
  * Define a constant on a container.
  * @param {string} name
  * @param {*} value
+ * @param {Object} container
+ * @returns {Object} The container instance.
  */
 function constant(name, value, container) {
   if (arguments.length === 2) {
@@ -48,8 +55,10 @@ function constant(name, value, container) {
 
 /**
  * Resolve an instance on a container.
+ * @private
  * @param {string} name
  * @param {Object} container
+ * @returns {Object} The resolved instance.
  */
 function resolve(name, container) {
   const instance = container[name];
@@ -63,6 +72,8 @@ function resolve(name, container) {
  * Define a service on a container.
  * @param {Function} Class
  * @param {string[]} dependencies
+ * @param {Object} container
+ * @returns {Object} The container instance.
  */
 function service(Class, dependencies, container) {
   if (arguments.length === 2) {

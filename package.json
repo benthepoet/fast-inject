@@ -1,7 +1,7 @@
 {
   "name": "fast-inject",
   "version": "1.1.0",
-  "description": "A dependency injection container built around function composition.",
+  "description": "A lightweight dependency injection container for Node.js.",
   "main": "index.js",
   "directories": {
     "test": "./test"
